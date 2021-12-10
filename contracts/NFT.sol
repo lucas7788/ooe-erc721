@@ -10,6 +10,7 @@ contract NFT is ERC721, Ownable {
     mapping(uint => bytes32) public getHash;// tokenID => hash
     mapping(bytes32 => bool) existed; // hash => bool
     uint public curId;
+
     constructor(string memory name_, string memory symbol_) ERC721(name_, symbol_) {}
 
     function mint(bytes32 hash) public {
@@ -18,6 +19,12 @@ contract NFT is ERC721, Ownable {
         _safeMint(msg.sender, id);
         inc_id();
         getHash[id] = hash;
+    }
+
+    function burn(uint id) public {
+        require(_exists(id), "invalid id");
+        require(ownerOf(id) == msg.sender, "invalid user");
+        _burn(id);
     }
 
     function next_id() internal view returns (uint) {
