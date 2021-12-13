@@ -7,12 +7,13 @@ const hre = require("hardhat");
 
 async function main() {
     // We get the contract to deploy
-    if (false) {
+    if (true) {
         const NFT = await hre.ethers.getContractFactory("NFT");
         const nft = await NFT.deploy("testName", "testSymbol");
 
         await nft.deployed();
         console.log("NFT deployed to:", nft.address);
+        //0xCdc664C04dFCe03c9DCdaB0e7c943a4C76C85ddC
         return;
     }
     if (true) {

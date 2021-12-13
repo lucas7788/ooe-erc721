@@ -25,6 +25,13 @@ contract NFT is ERC721, Ownable {
         require(_exists(id), "invalid id");
         require(ownerOf(id) == msg.sender, "invalid user");
         _burn(id);
+        delete getHash[id];
+    }
+
+    function transfer(address to, uint id) public {
+        require(_exists(id), "invalid id");
+        require(ownerOf(id) == msg.sender, "invalid user");
+        _safeTransfer(msg.sender, to, id, new bytes(0x0));
     }
 
     function next_id() internal view returns (uint) {
