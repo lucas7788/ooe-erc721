@@ -22,7 +22,7 @@ contract NFT is ERC721, Ownable {
     }
 
     function updateHash(uint id,bytes32 hash) public {
-        require(!existed[hash], "existed hash");
+        require(existed[hash], "existed hash");
         require(ownerOf(id) == msg.sender, "only owner");
         getHash[id] = hash;
     }
